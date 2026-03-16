@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/REoynm-T)
 # Actividad en clase: Diagrama de base de datos
 
 En esta actividad tendrán que modelar la base de datos planteada en este documento usando la libería de Spring Data JPA. Para esto, deben crear las clases de entidad correspondientes a cada tabla, definiendo las relaciones entre ellas utilizando anotaciones como `@OneToMany`, `@ManyToOne`, `@ManyToMany`, etc.
