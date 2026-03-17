@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Surveys</title>
+</head>
+
+<body>
+
+<h1>Survey List</h1>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+
+    <tr th:each="survey : ${surveys}">
+        <td th:text="${survey.id}"></td>
+        <td th:text="${survey.name}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

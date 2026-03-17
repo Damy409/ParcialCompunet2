@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions by Survey</title>
+</head>
+<body>
+<h1>Questions of the Survey</h1>
+
+<ul>
+    <li th:each="question : ${questions}" th:text="${question.name}">Question Name</li>
+</ul>
+
+</body>
+</html>
