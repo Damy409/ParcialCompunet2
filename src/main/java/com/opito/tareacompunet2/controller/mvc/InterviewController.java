@@ -2,6 +2,7 @@ package com.opito.tareacompunet2.controller.mvc;
 
 
 import com.opito.tareacompunet2.service.InterviewService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/interviews")
 public class InterviewController {
 
-    private final InterviewService interviewService;
+    @Autowired
+    private InterviewService interviewService;
 
-    public InterviewController(InterviewService interviewService) {
-        this.interviewService = interviewService;
-    }
 
     // entrevistas de una encuesta
     @GetMapping("/survey/{id}")
