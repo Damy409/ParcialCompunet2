@@ -129,4 +129,205 @@ Ref: question.type > type.name
 ```
 =======
 # ParcialCompunet2
->>>>>>> e0b3e9a711265640ec634b9df205b28f615b788c
+# 📘 Guía básica de Git en Linux
+
+Esta guía explica los comandos esenciales de Git para trabajar con repositorios en un entorno Linux usando la terminal. Incluye cómo clonar, guardar cambios, subirlos y manejar ramas en GitHub.
+
+---
+
+## 🧩 1. Clonar un repositorio
+
+Para descargar un proyecto desde GitHub:
+
+```bash
+git clone https://github.com/usuario/repositorio.git
+```
+
+Entrar a la carpeta del proyecto:
+
+```bash
+cd repositorio
+```
+
+---
+
+## 🧩 2. Ver el estado del repositorio
+
+Muestra los archivos modificados o pendientes:
+
+```bash
+git status
+```
+
+---
+
+## 🧩 3. Agregar cambios (staging)
+
+Agregar todos los archivos modificados:
+
+```bash
+git add .
+```
+
+Agregar un archivo específico:
+
+```bash
+git add nombre_archivo
+```
+
+---
+
+## 🧩 4. Guardar cambios (commit)
+
+Guardar los cambios con un mensaje descriptivo:
+
+```bash
+git commit -m "Descripción de los cambios"
+```
+
+---
+
+## 🧩 5. Subir cambios a GitHub
+
+Subir cambios a la rama principal:
+
+```bash
+git push origin main
+```
+
+---
+
+## 🧩 6. Traer cambios del repositorio remoto
+
+Actualizar tu repositorio local:
+
+```bash
+git pull origin main
+```
+
+---
+
+## 🌿 7. Manejo de ramas
+
+### Crear una nueva rama:
+
+```bash
+git branch nombre-rama
+```
+
+### Cambiar de rama:
+
+```bash
+git checkout nombre-rama
+```
+
+### Crear y cambiar a una rama en un solo paso:
+
+```bash
+git checkout -b nombre-rama
+```
+
+### Ver todas las ramas:
+
+```bash
+git branch
+```
+
+---
+
+## 🔀 8. Fusionar ramas (merge)
+
+Desde la rama principal (main):
+
+```bash
+git merge nombre-rama
+```
+
+---
+
+## ❌ 9. Resolver conflictos
+
+Cuando hay conflictos:
+
+1. Editar los archivos con conflicto
+2. Guardar cambios
+3. Ejecutar:
+
+```bash
+git add .
+git commit -m "Resolución de conflictos"
+```
+
+---
+
+## 🔗 10. Configurar repositorio remoto
+
+Agregar repositorio remoto:
+
+```bash
+git remote add origin https://github.com/usuario/repositorio.git
+```
+
+Ver repositorios remotos:
+
+```bash
+git remote -v
+```
+
+Cambiar URL del repositorio remoto:
+
+```bash
+git remote set-url origin NUEVA_URL
+```
+
+---
+
+## 🧹 11. Otros comandos útiles
+
+### Ver historial de commits:
+
+```bash
+git log
+```
+
+### Ver cambios en archivos:
+
+```bash
+git diff
+```
+
+### Eliminar una rama:
+
+```bash
+git branch -d nombre-rama
+```
+
+---
+
+## 🔐 12. Autenticación
+
+En GitHub, se recomienda usar un **token personal (PAT)** en lugar de contraseña.
+
+---
+
+## 🚀 Flujo de trabajo básico
+
+```bash
+git pull origin main
+git add .
+git commit -m "Cambios realizados"
+git push origin main
+```
+
+---
+
+## 📌 Recomendaciones
+
+* Escribir mensajes de commit claros
+* Hacer `git pull` antes de `push`
+* Trabajar con ramas para nuevas funcionalidades
+* Evitar usar `--force` a menos que sea necesario
+
+---
+
+✨ Con estos comandos puedes manejar completamente un proyecto con Git en Linux.
