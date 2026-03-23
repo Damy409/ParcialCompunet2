@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/REoynm-T)
 # Actividad en clase: Diagrama de base de datos
 
@@ -126,3 +127,6 @@ Ref: interview.survey_id > survey.id
 
 Ref: question.type > type.name
 ```
+=======
+# ParcialCompunet2
+>>>>>>> e0b3e9a711265640ec634b9df205b28f615b788c
