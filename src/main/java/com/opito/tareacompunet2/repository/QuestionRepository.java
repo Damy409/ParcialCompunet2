@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findBySectionSurveyId(Long surveyId);
 
     // Entender como funciona cada una de las consultas para poderlas hacer y hacer bien la union
-    // Aparte de entender como funciona las relaciones uno a muchos y muchos a uno 
+    // Aparte de entender como funciona las relaciones uno a muchos y muchos a uno
 
 
 
