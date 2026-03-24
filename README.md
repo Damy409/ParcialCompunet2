@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/REoynm-T)
 # Actividad en clase: Diagrama de base de datos
 
@@ -331,3 +330,256 @@ git push origin main
 ---
 
 ✨ Con estos comandos puedes manejar completamente un proyecto con Git en Linux.
+
+# 📘 Guía de Relaciones en JPA (OneToMany, ManyToOne, etc.)
+
+Esta guía te ayudará a entender cómo funcionan las relaciones en JPA para que puedas implementarlas correctamente en un parcial.
+
+---
+
+# 🧠 1. Concepto clave
+
+Las relaciones en bases de datos permiten conectar tablas.
+
+En JPA esto se traduce a relaciones entre clases:
+
+* Un objeto puede tener muchos otros → `@OneToMany`
+* Muchos pueden pertenecer a uno → `@ManyToOne`
+* Uno a uno → `@OneToOne`
+* Muchos a muchos → `@ManyToMany`
+
+---
+
+# 🧩 2. RELACIÓN MÁS IMPORTANTE: OneToMany / ManyToOne
+
+💡 Esta es la que más cae en parciales.
+
+## 🎯 Ejemplo: Usuario y Preguntas
+
+* Un usuario puede tener MUCHAS preguntas
+* Una pregunta pertenece a UN usuario
+
+---
+
+## 🧱 ENTIDAD USUARIO (lado "uno")
+
+```java
+@Entity
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Pregunta> preguntas;
+}
+```
+
+---
+
+## 🧱 ENTIDAD PREGUNTA (lado "muchos")
+
+```java
+@Entity
+public class Pregunta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String contenido;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+}
+```
+
+---
+
+## 🧠 CLAVE DEL PARCIAL
+
+| Anotación   | Qué significa                           |
+| ----------- | --------------------------------------- |
+| @OneToMany  | Un objeto tiene muchos                  |
+| @ManyToOne  | Muchos pertenecen a uno                 |
+| mappedBy    | Indica quién es el dueño de la relación |
+| @JoinColumn | Columna FK en la base de datos          |
+
+---
+
+# ⚠️ ERROR TÍPICO
+
+❌ No poner `mappedBy`
+❌ No usar `@JoinColumn`
+❌ Poner la relación en un solo lado
+
+---
+
+# 🔥 3. ¿Quién es el dueño de la relación?
+
+👉 SIEMPRE es el lado `@ManyToOne`
+
+Por eso:
+
+```java
+@ManyToOne
+@JoinColumn(name = "usuario_id")
+```
+
+💡 Esto crea la clave foránea en la tabla.
+
+---
+
+# 🧪 4. EJEMPLOS DE PARCIAL
+
+---
+
+## ✍️ EJERCICIO 1
+
+👉 Un autor tiene muchos libros
+
+### Autor:
+
+```java
+@OneToMany(mappedBy = "autor")
+private List<Libro> libros;
+```
+
+### Libro:
+
+```java
+@ManyToOne
+@JoinColumn(name = "autor_id")
+private Autor autor;
+```
+
+---
+
+## ✍️ EJERCICIO 2
+
+👉 Un cliente tiene muchas órdenes
+
+### Cliente:
+
+```java
+@OneToMany(mappedBy = "cliente")
+private List<Orden> ordenes;
+```
+
+### Orden:
+
+```java
+@ManyToOne
+@JoinColumn(name = "cliente_id")
+private Cliente cliente;
+```
+
+---
+
+## ✍️ EJERCICIO 3 (IMPORTANTE)
+
+👉 Crear y guardar relación
+
+```java
+Usuario usuario = new Usuario();
+usuario.setNombre("Damy");
+
+Pregunta p1 = new Pregunta();
+p1.setContenido("¿Qué es JPA?");
+p1.setUsuario(usuario);
+
+Pregunta p2 = new Pregunta();
+p2.setContenido("¿Qué es Spring?");
+p2.setUsuario(usuario);
+
+usuario.setPreguntas(Arrays.asList(p1, p2));
+
+usuarioRepository.save(usuario);
+```
+
+💡 Gracias a `cascade = ALL`, se guarda TODO.
+
+---
+
+# 🔁 5. OTRAS RELACIONES
+
+---
+
+## 🧩 OneToOne
+
+```java
+@OneToOne
+@JoinColumn(name = "perfil_id")
+private Perfil perfil;
+```
+
+---
+
+## 🧩 ManyToMany
+
+```java
+@ManyToMany
+@JoinTable(
+    name = "estudiante_curso",
+    joinColumns = @JoinColumn(name = "estudiante_id"),
+    inverseJoinColumns = @JoinColumn(name = "curso_id")
+)
+private List<Curso> cursos;
+```
+
+---
+
+# ⚙️ 6. application.properties (PostgreSQL)
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/mi_base
+spring.datasource.username=postgres
+spring.datasource.password=1234
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+```
+
+---
+
+# 🚨 7. ERRORES QUE TE PUEDEN BAJAR PUNTOS
+
+* ❌ No definir bien la relación
+* ❌ Olvidar `@JoinColumn`
+* ❌ No usar listas en `@OneToMany`
+* ❌ No inicializar relaciones
+* ❌ Confundir dueño de la relación
+
+---
+
+# 🧠 8. TIP DE ORO PARA EL PARCIAL
+
+Cuando veas un enunciado:
+
+👉 “Un cliente puede tener muchas compras”
+
+PIENSAS:
+
+* Cliente → `@OneToMany`
+* Compra → `@ManyToOne`
+
+---
+
+# 🚀 9. RESUMEN RÁPIDO
+
+```text
+OneToMany → lista
+ManyToOne → clave foránea
+mappedBy → lado inverso
+JoinColumn → columna en BD
+```
+
+---
+
+✨ Con esto puedes resolver cualquier ejercicio básico de relaciones en JPA.
+
